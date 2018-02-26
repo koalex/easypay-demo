@@ -27,7 +27,7 @@
     "start": "pm2 startOrReload ecosystem.config.js --env production",
     "start:prod": "pm2 startOrReload ecosystem.config.js --env production",
     "start:local": "cross-env NODE_ENV=production PORT=3000 pm2 start server.js -i -1",
-    "stop:local": "pm2 kill",
+    "kill": "pm2 kill",
     "dev": "cross-env NODE_ENV=development node server.js",
     "stop": "pm2 stop ecosystem.config.js --env production",
     "restart": "pm2 restart ecosystem.config.js --env production",
