@@ -1,0 +1,22 @@
+PSD
+dump.rdb
+yarn-error.log
+.nyc_output
+coverage
+tmp
+public/
+uploads/
+logs/
+node_modules/
+bower_components/
+.idea/
+errors.log
+stats.json
+words.txt
+.DS_Store
+#mongod.conf
+#mongod.development.conf
+npm-debug.log
+.bash_history deleted
+data/*
+!data/.gitkeep

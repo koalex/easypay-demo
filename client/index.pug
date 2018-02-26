@@ -1,0 +1,116 @@
+doctype html
+if userAgent.isIE
+    <!--[if lte IE 9]>
+    html.no-js.lte-ie9
+    <![endif]-->
+    <!--[if lte IE 10]>
+    html.no-js.lte-ie10
+    <![endif]-->
+    <!--[if !(IE)]><!-->
+html.no-js
+    if userAgent.isIE
+        <!--<![endif]-->
+    head
+        meta(charset='utf-8')
+        title #{!outdatedbrowser ? 'Тестовое задание EasyPay' : 'Ваш браузер не поддерживается'}
+
+        if polyfill
+            each val, index in polyfill
+                script !{val}
+
+        if favicons
+            each val, index in favicons.html
+                !=val
+        script document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+        meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no, ya-title=fade, ya-dock=fade')
+
+
+        //- https://github.com/kudago/smart-app-banner
+        meta(name='apple-itunes-app' content='app-id=YOUR_APP_STORE_ID, affiliate-data=YOUR_AFFILIATE_DATA, app-argument=myURL')
+        meta(name='google-play-app' content='app-id=com.package.android')
+        if userAgent.source.match(/IEMobile\/10\.0/)
+            style
+                | @-ms-viewport{width:auto!important}
+            script.
+                if (navigator.userAgent.match(/IEMobile\/10\.0/)) {
+                    var msViewportStyle = document.createElement('style')
+                    msViewportStyle.appendChild(document.createTextNode('@-ms-viewport{width:auto!important}'));
+                    document.querySelector('head').appendChild(msViewportStyle)
+                }
+        if userAgent.isMobile
+            <!--[if IEMobile]>
+            meta(http-equiv='cleartype' content='on')
+            <![endif]-->
+            meta(name='HandheldFriendly' content='True')
+
+        if outdatedbrowser
+            if assets &&  assets.outdatedbrowser
+                if assets.outdatedbrowser.css
+                    link(rel='stylesheet' type='text/css' href='' + assets.outdatedbrowser.css)
+                if assets.outdatedbrowser.js
+                    script(src='' + assets.outdatedbrowser.js defer)
+        else
+            if assets &&  assets.vendor
+                if assets.vendor.css
+                    link(rel='stylesheet' type='text/css' href='' + assets.vendor.css)
+                if assets.vendor.js
+                    script(src='' + assets.vendor.js defer)
+
+            if assets &&  assets.index
+                if assets.index.css
+                    link(rel='stylesheet' type='text/css' href=''+assets.index.css)
+                if assets.index.js
+                    script(src='' + assets.index.js defer)
+
+        meta(name='msapplication-tap-highlight' content='no')
+        meta(name='msapplication-starturl' content='https://ssl.easypay.by')
+        meta(name='application-name' content='Тестовое задание EasyPay')
+        meta(name='msapplication-tooltip' content='Тестовое задание EasyPay')
+        meta(name='description' content='Тестовое задание EasyPay')
+        meta(name='apple-mobile-web-app-capable' content='yes')
+        meta(name='apple-mobile-web-app-status-bar-style' content='black')
+        meta(name='google' content='notranslate')
+        meta(name='theme-color' content='#282d33')
+        meta(name='SKYPE_TOOLBAR' content='SKYPE_TOOLBAR_PARSER_COMPATIBLE')
+        meta(name='format-detection' content='telephone=no')
+        meta(name='format-detection' content='address=no')
+        meta(name='twitter:card' content='#!twiterCard')
+        meta(name='twitter:site' content='https://ssl.easypay.by')
+        meta(name='twitter:title' content='Тестовое задание EasyPay')
+        meta(name='twitter:description' content='Тестовое задание EasyPay')
+
+        //-meta(name='twitter:creator' content='')
+        meta(name='twitter:domain' content='https://ssl.easypay.by')
+        //- For each page url of page
+        meta(name='twitter:url' content='https://ssl.easypay.by')
+        //- FIXME: og:image must be 1200x630 3) twitter:image:src must be min
+        meta(property='og:image' content='/assets/favicons/logo.pngapple-touch-startup-image-1242x2148.png')
+
+        //- FIXME: image_src must be 100x100
+        link(rel='image_src' href='/assets/favicons/logo.pngapple-touch-icon-114x114.png')
+
+        //- FIXME: twitter:image:src must be at least 280x150, --> twitter:image:width twitter:image:height
+        meta(name='twitter:image:src' content='/assets/favicons/logo.pngapple-touch-startup-image-320x460.png')
+
+        meta(property='og:title' content='Тестовое задание EasyPay')
+        meta(property='og:type' content='website')
+        meta(property='og:description' content='Тестовое задание EasyPay')
+
+        meta(property='og:url' content='https://ssl.easypay.by')
+        meta(property='og:site_name' content='https://ssl.easypay.by')
+        //-meta(property='fb:admins' content='#!facebook admin id')
+    body
+        <!--noindex-->
+        noscript
+
+        div.no-js(style="display: none; height: 100%")
+            p(style="color: #fff; font-size: 16px; font-weight: bold; text-align: center; margin: 0; font-family: Helvetica, 'Roboto Light', Tahoma, 'Helvetica CY', 'Nimbus Sans L', sans-serif ")
+                br
+                | В вашем браузере отключен JavaScript <br><br> Для просмотра данного сайта <a href="http://www.enable-javascript.com/ru" style="text-decoration: underline; color: #fff" title="Как включить JavaScript ?" target="_blank">включите</a> JavaScript
+        <!--/noindex-->
+
+        if (outdatedbrowser)
+            include ./outdatedbrowser.pug
+        else
+            #root
+        //-<script id="__bs_script__">//<![CDATA[document.write("<script async src='http://HOST:3000/browser-sync/browser-sync-client.js?v=2.18.8'><\/script>".replace("HOST", location.hostname));//]]></script>
