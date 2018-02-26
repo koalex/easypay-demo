@@ -47,6 +47,11 @@ const Phones = universal(import('./components/Phones'), {
 
 let routes = [
 	{
+		path: '/',
+		component: ({ ...props }) => <Redirect to={{ pathname: '/signin' }} />,
+		exact: true
+	},
+	{
 		path: '/phones',
 		private: true,
 		component: ({ ...props }) => <Phones {...props} />,
